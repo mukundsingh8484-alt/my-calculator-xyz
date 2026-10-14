@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #f0f0f0;
+        }
+
+        .box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px 0;
+            font-size: 18px;
+        }
+
+        button {
+            padding: 10px 12px;
+            margin: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            border: none;
+            border-radius: 6px;
+            background: #007bff;
+            color: white;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        #result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: left;
+            background: #eef;
+            padding: 10px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>Calculator</h2>
+        <input type="number" id="a" placeholder="Enter first number">
+        <input type="number" id="b" placeholder="Enter second number">
+        <br>
+        <button onclick="calc('add')">Addition</button>
+        <button onclick="calc('div')">Division</button>
+        <button onclick="calc('mul')">Multiplication</button>
+        <button onclick="calc('sub')">Difference</button>
+        <button onclick="calc('mod')">Remainder</button>
+        <button onclick="calc('all')" style="background:green; width:90%">Show All</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function calc(type) {
+            let a = parseFloat(document.getElementById('a').value);
+            let b = parseFloat(document.getElementById('b').value);
+            let res = document.getElementById('result');
+
+            if (isNaN(a) || isNaN(b)) {
+                res.innerHTML = "Please enter both numbers";
+                return;
+            }
+
+            if (b == 0 && (type == 'div' || type == 'mod' || type == 'all')) {
+                res.innerHTML = "b is zero, division / remainder not possible<br><br>" +
+                    `addition = ${a + b}<br>` +
+                    `difference = ${a - b}<br>` +
+                    `multiplication = ${a * b}`;
+                return;
+            }
+
+            if (type == 'add') res.innerHTML = `addition = ${a + b}`;
+            if (type == 'sub') res.innerHTML = `difference = ${a - b}`;
+            if (type == 'mul') res.innerHTML = `multiplication = ${a * b}`;
+            if (type == 'div') res.innerHTML = `division = ${a / b}`;
+            if (type == 'mod') res.innerHTML = `remainder = ${a % b}`;
+            if (type == 'all') {
+                res.innerHTML = `addition = ${a + b}<br>
+                         difference = ${a - b}<br>
+                         multiplication = ${a * b}<br>
+                         division = ${a / b}<br>
+                         remainder = ${a % b}`;
+            }
+        }
+    </script>
+</body>
+
+</html>
